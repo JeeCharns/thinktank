@@ -1,20 +1,12 @@
-import './App.css';
-import './components/input';
-import {
-  Editable,
-  EditableInput,
-  EditableTextarea,
-  EditablePreview,
-} from "@chakra-ui/react";
-import { TextInput } from './components/input';
-import { HeadingHome } from './components/banner';
+import React from "react";
+import { Home } from "./pages/homepage";
+import { Route, Routes } from "react-router-dom";
+import { OtherPage } from "./pages/other-page";
 
-function App() {
+export function App() {
   return (
-    <>
-    <HeadingHome />
-    <TextInput />
-    </>
+      <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="very-secret-route" element={<OtherPage />} />
+    </Routes>
   )}
-
-export default App;
