@@ -32,8 +32,7 @@ import {
           leastDestructiveRef={cancelRef}
           onClose={onClose}
           motionPreset='slideInBottom'
-          boxshadow="md"
-        >
+          boxshadow="lg">
           <AlertDialogOverlay>
             <AlertDialogContent>
             <AlertDialogHeader fontSize='lg' fontWeight='bold'>
