@@ -5,7 +5,7 @@ import { Home } from "./pages/homepage";
 import { Route, Routes } from "react-router-dom";
 import { OtherPage } from "./pages/other-page";
 
-function App() {
+export function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -14,4 +14,9 @@ function App() {
   );
 }
 
-export default App;
+
+
+
+
+
+  
