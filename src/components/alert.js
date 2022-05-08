@@ -25,7 +25,7 @@ export function Alert() {
         <Box position="absolute" bottom="0">
           <Button
             size="md"
-            fontweight="bold"
+            fontWeight="bold"
             variant="link"
             onClick={onOpen}
             color="orange.300"

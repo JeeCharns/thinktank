@@ -1,9 +1,41 @@
 import { Button, Container, Heading, Image } from "@chakra-ui/react";
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { db } from "../firebase/firebase";
+
+const useQuery = () => {
+  const { search } = useLocation();
+
+  return React.useMemo(() => new URLSearchParams(search), [search]);
+};
 
 const OtherPage = () => {
   const history = useNavigate();
+
+  const [thinktankDocRef, setThinktankDocRef] = useState(null);
+  const [thinktankData, setThinktankData] = useState(null);
+
+  const query = useQuery();
+
+  useEffect(() => {
+    const docId = query.get("id");
+
+    const loadThinkTank = async () => {
+      const docRef = db.collection("ThinkTanks").doc(docId);
+      const doc = await docRef.get({ source: "server" });
+      if (!doc.exists) {
+        console.log("ooops - no document exists!!");
+      } else {
+        console.log('success!!! found the document')
+        return docRef.onSnapshot((doc) => {
+          setThinktankDocRef(docRef);
+          setThinktankData(doc.data());
+        });
+      }
+    };
+
+    loadThinkTank();
+  }, []);
 
   return (
     <Container pt={100} display="flex" alignItems="center" flexDir="column">
@@ -18,4 +50,4 @@ const OtherPage = () => {
   );
 };
 
-export default OtherPage
+export default OtherPage;

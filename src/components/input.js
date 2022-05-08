@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Input,
   Button,
@@ -12,17 +12,15 @@ import {
 
 const MAX_ALLOWED_CHARACTERS = 100;
 
-export const TextInput = () => {
-  const [input, setInput] = useState("");
-
+export const TextInput = ({ question, setQuestion, onClick }) => {
   const toast = useToast();
 
   const handleChange = (e) => {
     // We only update our state if the number of characters doesn't exceed the max allowed
     if (e.target.value.length <= MAX_ALLOWED_CHARACTERS) {
-      setInput(e.target.value);
+      setQuestion(e.target.value);
     } else {
-      // If it exceeds, we could send a toast to inform the user of this 
+      // If it exceeds, we could send a toast to inform the user of this
       toast({
         title: "Maximum length exceeded",
         description: "Let's keep these questions punchy!",
@@ -41,15 +39,21 @@ export const TextInput = () => {
           size="md"
           variant="flushed"
           focusBorderColor="gray.200"
-          disabled={input.length > MAX_ALLOWED_CHARACTERS}
+          disabled={question.length > MAX_ALLOWED_CHARACTERS}
           onChange={handleChange}
-          value={input}
+          value={question}
         />
         {/* Please style me I am uglyyy */}
-        <Text>{input.length} / 100</Text>
+        <Text>{question.length} / 100</Text>
         <Flex>
           <Spacer />
-          <Button mt="8px" bgColor="gray.700" color="white" variant="solid">
+          <Button
+            mt="8px"
+            bgColor="gray.700"
+            color="white"
+            variant="solid"
+            onClick={onClick}
+          >
             Create Think Tank
           </Button>
         </Flex>
