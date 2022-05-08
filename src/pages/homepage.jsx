@@ -22,7 +22,10 @@ const Home = () => {
       .add({
         question,
       })
-      .then((data) => setDocumentId(data.id));
+      .then((data) => {
+        console.log(`woooo new document created with id ${data.id}`)
+        setDocumentId(data.id)
+      });
   };
 
   return (
