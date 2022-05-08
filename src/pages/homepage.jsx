@@ -1,15 +1,16 @@
 import React from "react";
 import HeadingHome from "../components/banner";
-import TextInput from "../components/input";
-import { Results } from '../components/results';
+import { TextInput } from "../components/input";
+import { Alert } from "../components/alert";
 
-
-export const Home = () => {
+const Home = () => {
   return (
     <>
       <HeadingHome />
       <TextInput />
-      <Results />
+      <Alert />
     </>
   );
 };
+
+export default Home;
