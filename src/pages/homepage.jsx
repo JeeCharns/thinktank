@@ -58,7 +58,7 @@ const Home = () => {
         <Text>I am the final state</Text>
       );
     }
-  }, []);
+  }, [question]);
 
   return (
     <>
