@@ -7,7 +7,7 @@ import { Spinner, Text } from "@chakra-ui/react";
 
 const Home = () => {
   const [question, setQuestion] = useState("");
-  const [response, setResponse] = useState({ isLoading: false, id: 123 });
+  const [response, setResponse] = useState({ isLoading: false, id: null });
 
   console.log("response", response);
 
@@ -33,7 +33,6 @@ const Home = () => {
       });
   };
 
-
   const renderPage = useMemo(() => {
     if (!response.id && !response.isLoading) {
       return (
@@ -54,11 +53,9 @@ const Home = () => {
         </>
       );
     } else {
-      return (
-        <Text>I am the final state</Text>
-      );
+      return <Text>I am the final state</Text>;
     }
-  }, [question]);
+  }, [question, response.id, response.isLoading]);
 
   return (
     <>
