@@ -30,6 +30,8 @@ const Home = () => {
       .then((data) => {
         console.log(`woooo new document created with id ${data.id}`);
         setResponse({ isLoading: false, id: data.id });
+
+        // add success toast here!!
       });
   };
 
@@ -43,7 +45,6 @@ const Home = () => {
             onClick={handleCreateThinkTank}
           />
           <Alert />
-          {response.isLoading === true ? <Spinner /> : null}
         </>
       );
     } else if (!response.id && response.isLoading) {
