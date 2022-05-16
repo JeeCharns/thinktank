@@ -14,7 +14,6 @@ const MAX_ALLOWED_CHARACTERS = 100;
 
 export const TextInput = ({ question, setQuestion, onClick }) => {
   const toast = useToast();
-
   const handleChange = (e) => {
     // We only update our state if the number of characters doesn't exceed the max allowed
     if (e.target.value.length <= MAX_ALLOWED_CHARACTERS) {
@@ -25,7 +24,7 @@ export const TextInput = ({ question, setQuestion, onClick }) => {
         title: "Maximum length exceeded",
         description: "Let's keep these questions punchy!",
         status: "warning",
-        duration: 5000,
+        duration: 3000,
         isClosable: true,
       });
     }
@@ -38,22 +37,22 @@ export const TextInput = ({ question, setQuestion, onClick }) => {
           placeholder="Write Your Problem Statement Here"
           size="md"
           variant="flushed"
-          focusBorderColor="gray.200"
-          disabled={question.length > MAX_ALLOWED_CHARACTERS}
+          focusBorderColor="gray.300"
+          isDisabled={question.length > MAX_ALLOWED_CHARACTERS +1}
           onChange={handleChange}
           value={question}
         />
-        {/* Please style me I am uglyyy */}
-        <Text>{question.length} / 100</Text>
+        <Text color='gray.300' fontSize='sm' mt="8px">{question.length} / 100</Text>
         <Flex>
           <Spacer />
           <Button
-            mt="8px"
+            mt="0px"
             bgColor="gray.700"
             color="white"
             variant="solid"
             onClick={onClick}
-          >
+            isDisabled={!question.length}
+            >
             Create Think Tank
           </Button>
         </Flex>

@@ -8,7 +8,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="very-secret-route" element={<OtherPage />} />
+      <Route path="/:id" element={<OtherPage />} />
     </Routes>
   );
 };
