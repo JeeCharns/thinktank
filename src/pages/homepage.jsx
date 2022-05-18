@@ -4,14 +4,12 @@ import { TextInput } from "../components/input";
 import { Alert } from "../components/alert";
 import { db } from "../firebase/firebase";
 import { Center, Spinner, Text, Box, VStack, Button } from "@chakra-ui/react";
-import { Copylink } from "../components/copylink"
-import { CopyIcon } from '@chakra-ui/icons';
-
+import { Copylink } from "../components/copylink";
+import { CopyIcon } from "@chakra-ui/icons";
 
 const Home = () => {
   const [question, setQuestion] = useState("");
-  const [response, setResponse] = useState({ isLoading: false, id: null });
-
+  const [response, setResponse] = useState({ isLoading: false, id: 123 });
 
   console.log("response", response);
 
@@ -54,40 +52,45 @@ const Home = () => {
     } else if (!response.id && response.isLoading) {
       return (
         <Center p="50">
-          <Spinner  
-  thickness='4px'
-  speed='1s'
-  emptyColor='gray.200'
-  color='teal'
-  size='lg'/>
+          <Spinner
+            thickness="4px"
+            speed="1s"
+            emptyColor="gray.200"
+            color="teal"
+            size="lg"
+          />
         </Center>
       );
     } else {
       return (
         <Box h="60%">
-      <Center >
-      <VStack paddingTop={10} spacing={4} maxWidth={400}>
-      <Button
-      size='sm'
-      variant='outline'
-      color="orange.300"
-      leftIcon={<CopyIcon />}
-      borderColor="orange.300"
-      > Copy link to clipboard.
-      </Button>
-      </VStack>
-      <Box pos="fixed" bottom="25%">
-        <Button 
-    bgColor="gray.700"
-    color="white"
-    variant="solid" 
-    size="lg"   
-      > Continue
-      </Button>
-      </Box>
-      </Center>
-      </Box>
-      )}
+          <Center>
+            <VStack paddingTop={10} spacing={4} maxWidth={400}>
+              {/* <Button
+                size="sm"
+                variant="outline"
+                color="orange.300"
+                leftIcon={<CopyIcon />}
+                borderColor="orange.300"
+              >
+                Copy link to clipboard.
+              </Button> */}
+              <Copylink />
+            </VStack>
+            <Box pos="fixed" bottom="25%">
+              <Button
+                bgColor="gray.700"
+                color="white"
+                variant="solid"
+                size="lg"
+              >
+                Continue
+              </Button>
+            </Box>
+          </Center>
+        </Box>
+      );
+    }
   }, [question, response.id, response.isLoading]);
 
   return (
