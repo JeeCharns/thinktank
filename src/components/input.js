@@ -46,7 +46,6 @@ export const TextInput = ({ question, setQuestion, onClick }) => {
         <Flex>
           <Spacer />
           <Button
-            mt="0px"
             bgColor="gray.700"
             color="white"
             variant="solid"
