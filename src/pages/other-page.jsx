@@ -1,7 +1,9 @@
-import { Button, Container, Heading, Image } from "@chakra-ui/react";
+import { Button, Container, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { db } from "../firebase/firebase";
+import HeadingHome from "../components/banner";
+import SubmitAnswer from "../components/submit";
 
 // A helper function to get the query params in a url
 const useQuery = () => {
@@ -44,15 +46,17 @@ const OtherPage = () => {
   }, []);
 
   return (
+    <>
+    <HeadingHome />
     <Container pt={100} display="flex" alignItems="center" flexDir="column">
-      <Heading textAlign="center" mb={50}>
-        You found the secret page!
-      </Heading>
-      <Image src="https://media.giphy.com/media/RJhuJzSw9dwgSTzwci/giphy.gif" />
+      <Text as="b" fontSize="lg" color="gray.700" textAlign="center" mb={50}>
+      What would it mean for us to have a healthy work-life balance?      </Text>
+
       <Button onClick={() => history(-1)} mt={50}>
-        I&apos;m scared, let's go back
+        I&apos;m scared, let &apos;s go back
       </Button>
     </Container>
+    </>
   );
 };
 

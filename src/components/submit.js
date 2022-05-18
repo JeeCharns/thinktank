@@ -12,7 +12,7 @@ import {
 
 const MAX_ALLOWED_CHARACTERS = 100;
 
-export const TextInput = ({ question, setQuestion, onClick }) => {
+export const SubmitAnswer = ({ question, setQuestion, onClick }) => {
   const toast = useToast();
   const handleChange = (e) => {
     // We only update our state if the number of characters doesn't exceed the max allowed
@@ -34,10 +34,10 @@ export const TextInput = ({ question, setQuestion, onClick }) => {
     <Center>
       <Box p="8" w="60%">
         <Input
-          placeholder="Write Your Problem Statement Here"
+          placeholder="Submit your answer here..."
           size="md"
           variant="flushed"
-          focusBorderColor="gray.700"
+          focusBorderColor="gray.300"
           isDisabled={question.length > MAX_ALLOWED_CHARACTERS +1}
           onChange={handleChange}
           value={question}
@@ -49,15 +49,12 @@ export const TextInput = ({ question, setQuestion, onClick }) => {
             bgColor="gray.700"
             color="white"
             variant="solid"
-            onClick={onClick}
-            isDisabled={!question.length}
             >
-            Create Think Tank
-          </Button>
+Submit          </Button>
         </Flex>
       </Box>
     </Center>
   );
 };
 
-export default TextInput;
+export default SubmitAnswer;

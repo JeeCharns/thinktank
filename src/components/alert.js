@@ -30,7 +30,7 @@ export function Alert() {
             onClick={onOpen}
             color="orange.300"
           >
-            I'm new here. What's this?
+            I&apos;m new here. What&apos;s this?
           </Button>
 
           <AlertDialog

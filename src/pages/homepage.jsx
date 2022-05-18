@@ -3,13 +3,12 @@ import HeadingHome from "../components/banner";
 import { TextInput } from "../components/input";
 import { Alert } from "../components/alert";
 import { db } from "../firebase/firebase";
-import { Center, Spinner, Text, Box, VStack, Button } from "@chakra-ui/react";
+import { Center, Spinner, Box, VStack, Button } from "@chakra-ui/react";
 import { Copylink } from "../components/copylink";
-import { CopyIcon } from "@chakra-ui/icons";
 
 const Home = () => {
   const [question, setQuestion] = useState("");
-  const [response, setResponse] = useState({ isLoading: false, id: 123 });
+  const [response, setResponse] = useState({ isLoading: false, id: null });
 
   console.log("response", response);
 
