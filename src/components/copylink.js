@@ -10,7 +10,11 @@ export function Copylink() {
   const handleCopy = () => {
     onCopy();
     toast({
-      title: "Copied!",
+      title: "Link copied to clipboard",
+      description: "Share with everyone!",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
     });
   };
 

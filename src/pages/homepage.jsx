@@ -9,6 +9,7 @@ import { Copylink } from "../components/copylink";
 const Home = () => {
   const [question, setQuestion] = useState("");
   const [response, setResponse] = useState({ isLoading: false, id: null });
+  
 
   console.log("response", response);
 
@@ -31,6 +32,7 @@ const Home = () => {
       .then((data) => {
         console.log(`woooo new document created with id ${data.id}`);
         setResponse({ isLoading: false, id: data.id });
+        
 
         // add success toast here!!
       });
