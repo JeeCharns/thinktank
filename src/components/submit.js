@@ -7,17 +7,17 @@ import {
   Spacer,
   Center,
   Text,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
 
 const MAX_ALLOWED_CHARACTERS = 100;
 
-export const SubmitAnswer = ({ question, setQuestion, onClick }) => {
+export const SubmitAnswer = ({ submit, setSubmit, onClick }) => {
   const toast = useToast();
   const handleChange = (e) => {
     // We only update our state if the number of characters doesn't exceed the max allowed
     if (e.target.value.length <= MAX_ALLOWED_CHARACTERS) {
-      setQuestion(e.target.value);
+      setSubmit(e.target.value);
     } else {
       // If it exceeds, we could send a toast to inform the user of this
       toast({
@@ -32,17 +32,16 @@ export const SubmitAnswer = ({ question, setQuestion, onClick }) => {
 
   return (
     <Center>
-      <Box p="8" w="60%">
+      <Box w="40%">
         <Input
-          placeholder="Submit your answer here..."
+          placeholder="Submit Your Answer"
           size="md"
           variant="flushed"
-          focusBorderColor="gray.300"
-          isDisabled={question.length > MAX_ALLOWED_CHARACTERS +1}
+          focusBorderColor="gray.700"
+          isDisabled={submit.length > MAX_ALLOWED_CHARACTERS +1}
           onChange={handleChange}
-          value={question}
-        />
-        <Text color='gray.300' fontSize='sm' mt="8px">{question.length} / 100</Text>
+          value={submit} />
+          <Text color='gray.300' fontSize='sm' mt="8px">{submit.length} / 100</Text>
         <Flex>
           <Spacer />
           <Button
@@ -52,9 +51,8 @@ export const SubmitAnswer = ({ question, setQuestion, onClick }) => {
             >
 Submit          </Button>
         </Flex>
-      </Box>
-    </Center>
-  );
-};
+</Box>
+</Center>
+  )}
 
 export default SubmitAnswer;

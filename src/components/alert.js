@@ -22,7 +22,7 @@ export function Alert() {
   return (
     <>
       <Center>
-        <Box position="absolute" bottom="0">
+        <Box position="fixed" bottom="40%">
           <Button
             size="md"
             fontWeight="bold"

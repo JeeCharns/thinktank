@@ -67,15 +67,6 @@ const Home = () => {
         <Box h="60%">
           <Center>
             <VStack paddingTop={10} spacing={4} maxWidth={400}>
-              {/* <Button
-                size="sm"
-                variant="outline"
-                color="orange.300"
-                leftIcon={<CopyIcon />}
-                borderColor="orange.300"
-              >
-                Copy link to clipboard.
-              </Button> */}
               <Copylink />
             </VStack>
             <Box pos="fixed" bottom="25%">

@@ -32,7 +32,7 @@ export const TextInput = ({ question, setQuestion, onClick }) => {
 
   return (
     <Center>
-      <Box p="8" w="60%">
+      <Box pt={10} w="50%">
         <Input
           placeholder="Write Your Problem Statement Here"
           size="md"

@@ -3,7 +3,7 @@ import { Button, useToast, useClipboard, Box, Center, VStack } from "@chakra-ui/
 
 import { CheckIcon, CopyIcon } from "@chakra-ui/icons";
 
-export function Copylink() {
+export function Sharelink() {
   const { hasCopied, onCopy } = useClipboard();
   const toast = useToast();
 
@@ -19,28 +19,22 @@ export function Copylink() {
   };
 
   return (
-    <Box h="60%">
+    <Box>
       <Center>
-        <VStack paddingTop={10} spacing={4} maxWidth={400}>
+        <VStack paddingTop={5} spacing={4} maxWidth={400}>
           <Button
-            size="md"
+            size="sm"
             variant="outline"
             color="orange.300"
             leftIcon={hasCopied ? <CheckIcon /> : <CopyIcon />}
             borderColor="orange.300"
             onClick={handleCopy}
           >
-            Copy link to clipboard.
-          </Button>
+Share          </Button>
         </VStack>
-        <Box pos="fixed" bottom="25%">
-          <Button bgColor="gray.700" color="white" variant="solid" size="lg">
-            Continue
-          </Button>
-        </Box>
       </Center>
     </Box>
   );
 }
 
-export default Copylink;
+export default Sharelink;

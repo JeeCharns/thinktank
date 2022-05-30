@@ -1,16 +1,16 @@
-import { Button, Container, Text } from "@chakra-ui/react";
+import {  Container, Text, useToast } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { db } from "../firebase/firebase";
 import HeadingHome from "../components/banner";
 import SubmitAnswer from "../components/submit";
+import Sharelink from "../components/sharelink";
 
 // A helper function to get the query params in a url
 const useQuery = () => {
   const { search } = useLocation();
   return React.useMemo(() => new URLSearchParams(search), [search]);
-};
-
+}
 const OtherPage = () => {
   const history = useNavigate();
 
@@ -18,6 +18,8 @@ const OtherPage = () => {
   const [thinktankData, setThinktankData] = useState(null);
 
   const query = useQuery();
+
+  const [submit, setSubmit] = useState("");
 
   useEffect(() => {
     // when the page loads...
@@ -47,17 +49,19 @@ const OtherPage = () => {
 
   return (
     <>
+    <Sharelink />
     <HeadingHome />
-    <Container pt={100} display="flex" alignItems="center" flexDir="column">
+    <Container pt={35} display="flex" alignItems="center" flexDir="column">
       <Text as="b" fontSize="lg" color="gray.700" textAlign="center" mb={50}>
-      What would it mean for us to have a healthy work-life balance?      </Text>
-
-      <Button onClick={() => history(-1)} mt={50}>
-        I&apos;m scared, let &apos;s go back
-      </Button>
-    </Container>
+      What would it mean for us to have a healthy work-life balance?      
+      </Text>
+      </Container>
+      <SubmitAnswer 
+      submit={submit}
+      setSubmit={setSubmit}
+      onClick={console.log('click')}
+      /> 
     </>
-  );
-};
+  )}
 
-export default OtherPage;
+  export default OtherPage;
