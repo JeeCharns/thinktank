@@ -48,6 +48,8 @@ export const SubmitAnswer = ({ submit, setSubmit, onClick }) => {
             bgColor="gray.700"
             color="white"
             variant="solid"
+            onClick={onClick}
+            isDisabled={!submit.length}
             >
 Submit          </Button>
         </Flex>

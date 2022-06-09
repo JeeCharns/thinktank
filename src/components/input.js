@@ -37,7 +37,7 @@ export const TextInput = ({ question, setQuestion, onClick }) => {
           placeholder="Write Your Problem Statement Here"
           size="md"
           variant="flushed"
-          focusBorderColor="gray.700"
+          focusBorderColor="gray.600"
           isDisabled={question.length > MAX_ALLOWED_CHARACTERS +1}
           onChange={handleChange}
           value={question}
