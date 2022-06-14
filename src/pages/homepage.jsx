@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import {Routes, Route, useNavigate} from 'react-router-dom';
 import HeadingHome from "../components/banner";
 import { TextInput } from "../components/input";
 import { Alert } from "../components/alert";
@@ -8,11 +9,8 @@ import { Copylink } from "../components/copylink";
 
 const Home = () => {
   const [question, setQuestion] = useState("");
-  const [response, setResponse] = useState({ isLoading: false, id: null });
+  const [response, setResponse] = useState({ isLoading: false, id: 1234 });
   
-
-  console.log("response", response);
-
   const handleCreateThinkTank = async () => {
     // if the question length exists, we don't create a document
     // and may want to show an error or disable the button
@@ -37,6 +35,12 @@ const Home = () => {
         // add success toast here!!
       });
   };
+
+  const navigate = useNavigate();
+  const answerPage = () => {
+    navigate('/1234')
+  }
+
 
   const renderPage = useMemo(() => {
     if (!response.id && !response.isLoading) {
@@ -75,6 +79,7 @@ const Home = () => {
                 color="white"
                 variant="solid"
                 size="lg"
+                onClick={answerPage}
               >
                 Continue
               </Button>

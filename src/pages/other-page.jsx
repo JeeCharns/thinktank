@@ -21,8 +21,13 @@ const OtherPage = () => {
   const query = useQuery();
 
   const [submit, setSubmit] = useState("");
-  const [answer, setAnswer] = useState({ isLoading: false, id: null });
+  const [answer, setAnswer] = useState({ isLoading: false, id: 1234 });
 
+  const navigate = useNavigate();
+  const home = () => {
+        navigate('/');
+    };
+    
 
   useEffect(() => {
     // when the page loads...
@@ -113,7 +118,8 @@ const OtherPage = () => {
                 bgColor="gray.700"
                 color="white"
                 variant="solid"
-                size="lg"
+                size="md"
+                onClick={home}
               >
                 We made it
               </Button>

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import {
   Input,
@@ -37,7 +38,7 @@ export const SubmitAnswer = ({ submit, setSubmit, onClick }) => {
           placeholder="Submit Your Answer"
           size="md"
           variant="flushed"
-          focusBorderColor="gray.700"
+          focusBorderColor="gray.600"
           isDisabled={submit.length > MAX_ALLOWED_CHARACTERS +1}
           onChange={handleChange}
           value={submit} />
