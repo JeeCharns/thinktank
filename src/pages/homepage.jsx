@@ -9,7 +9,7 @@ import { Copylink } from "../components/copylink";
 
 const Home = () => {
   const [question, setQuestion] = useState("");
-  const [response, setResponse] = useState({ isLoading: false, id: 1234 });
+  const [response, setResponse] = useState({ isLoading: false, id: null });
   
   const handleCreateThinkTank = async () => {
     // if the question length exists, we don't create a document
