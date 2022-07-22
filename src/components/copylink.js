@@ -2,10 +2,14 @@ import React from "react";
 import { Button, useToast, useClipboard, Box, Center, VStack } from "@chakra-ui/react";
 
 import { CheckIcon, CopyIcon } from "@chakra-ui/icons";
+import { useParams } from "react-router-dom";
 
 export function Copylink() {
   const { hasCopied, onCopy } = useClipboard();
+  
   const toast = useToast();
+  const location = useParams();
+  console.log(location)
 
   const handleCopy = () => {
     onCopy();

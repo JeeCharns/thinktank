@@ -1,13 +1,7 @@
 import React from 'react';
-import {Routes, Route, useNavigate} from 'react-router-dom';
 import { Center, Box, Text, Button, HStack } from '@chakra-ui/react';
 
-export function Voting() {
-// const navigate = useNavigate();
-// const home = () => {
-//     navigate('/');
-// };
-
+export const Voting = () => {
 
 return (
 <Center>
@@ -15,8 +9,7 @@ return (
    <Text textAlign='center'  color='gray.400' fontSize='xs'>0/1</Text> 
 <Box p={10} borderBottom='1px' borderColor='gray.200' >
     <Text as='i' align="center" color='gray.700' fontSize='medium'> 
-    “Making more time for deep work by reducing meetings encouraging async recordings for sharing updates”
-    </Text>
+</Text>
 </Box>
 <Box>
 <HStack>

@@ -1,15 +1,15 @@
 import React, { useMemo, useState } from "react";
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import HeadingHome from "../components/banner";
 import { TextInput } from "../components/input";
 import { Alert } from "../components/alert";
 import { db } from "../firebase/firebase";
-import { Center, Spinner, Box, VStack, Button } from "@chakra-ui/react";
+import { Center, Spinner, Box, Button, Text } from "@chakra-ui/react";
 import { Copylink } from "../components/copylink";
 
 const Home = () => {
   const [question, setQuestion] = useState("");
-  const [response, setResponse] = useState({ isLoading: false, id: null });
+  const [response, setResponse] = useState({ isLoading: false, id: null});
   
   const handleCreateThinkTank = async () => {
     // if the question length exists, we don't create a document
@@ -30,15 +30,12 @@ const Home = () => {
       .then((data) => {
         console.log(`woooo new document created with id ${data.id}`);
         setResponse({ isLoading: false, id: data.id });
-        
-
-        // add success toast here!!
       });
   };
 
   const navigate = useNavigate();
   const answerPage = () => {
-    navigate('/1234')
+    navigate(`/${response.id}`)
   }
 
 
@@ -70,9 +67,10 @@ const Home = () => {
       return (
         <Box h="60%">
           <Center>
-            <VStack paddingTop={10} spacing={4} maxWidth={400}>
+            <Box paddingTop={10} maxWidth={300}>
+              <Text color='gray.700' textAlign='center' noOfLines={2}>Project setup complete! Share the below to continue.</Text>
               <Copylink />
-            </VStack>
+            </Box>
             <Box pos="fixed" bottom="25%">
               <Button
                 bgColor="gray.700"
@@ -92,9 +90,12 @@ const Home = () => {
 
   return (
     <>
+     <Box pt={10}>
       <HeadingHome />
       {renderPage}
+      </Box>
     </>
+    
   );
 };
 
