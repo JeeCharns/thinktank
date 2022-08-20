@@ -9,6 +9,7 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+import PropTypes from 'prop-types';
 
 const MAX_ALLOWED_CHARACTERS = 100;
 
@@ -58,6 +59,13 @@ export const TextInput = ({ question, setQuestion, onClick }) => {
       </Box>
     </Center>
   );
+};
+
+TextInput.propTypes = {
+  name: PropTypes.string,
+  question: PropTypes.string,
+  setQuestion: PropTypes.string,
+  onClick: PropTypes.any,
 };
 
 export default TextInput;

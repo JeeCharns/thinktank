@@ -1,6 +1,6 @@
 import {  Container, Text, Box, Spinner, Center, VStack, Button } from "@chakra-ui/react";
 import React, { useEffect, useState, useMemo } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../firebase/firebase";
 import HeadingHome from "../components/banner";
 import SubmitAnswer from "../components/submit";
@@ -8,17 +8,15 @@ import Sharelink from "../components/sharelink";
 import Voting from "../components/voting";
 
 // A helper function to get the query params in a url
-const useQuery = () => {
-  const search = useLocation();
-  return React.useMemo(() => new URLSearchParams(search), [search]);
-}
+// const useQuery = () => {
+//   const search = useLocation();
+//   return React.useMemo(() => new URLSearchParams(search), [search]);
+// }
 
 const OtherPage = () => {
 
-  const [thinktankDocRef, setThinktankDocRef] = useState(null);
+  const [, setThinktankDocRef] = useState(null);
   const [thinktankData, setThinktankData] = useState(null);
-
-  const query = useQuery();
 
   const params = useParams();
 
