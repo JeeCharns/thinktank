@@ -103,7 +103,7 @@ const VotePage = () => {
         minH="100vh"
         justifyContent="space-between"
       >
-        <Center flexDir="column" px={6}>
+        <Center flexDir="column" px={6} justifyContent="flex-start">
           <Sharelink />
           <Image
             src={logo}

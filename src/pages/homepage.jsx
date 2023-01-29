@@ -83,13 +83,7 @@ const Home = () => {
         minH="90vh"
         justifyContent="space-between"
       >
-        <Center
-          flexDir="column"
-          flex={1}
-          justifyContent="flex-start"
-          px={6}
-          mt={6}
-        >
+        <Center flexDir="column" flex={1} justifyContent="flex-start" px={6}>
           <Box h="24px" />
           <Image
             src={logo}
