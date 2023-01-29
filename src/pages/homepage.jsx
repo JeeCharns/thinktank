@@ -13,8 +13,7 @@ import {
   Flex,
   useDisclosure,
   Divider,
-  Hide,
-  Show,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import arrow from "../assets/arrow-down.svg";
 import { collection, query, getDocs, orderBy, limit } from "firebase/firestore";
@@ -28,6 +27,16 @@ const Home = () => {
   const [latestThinkTanks, setLatestThinkTanks] = useState([]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const scrollRef = React.useRef();
+
+  const explainerVariant = useBreakpointValue(
+    {
+      base: <ExplainerDrawer isOpen={isOpen} onClose={onClose} />,
+      md: <Explainer isOpen={isOpen} onClose={onClose} />,
+    },
+    {
+      fallback: <Explainer isOpen={isOpen} onClose={onClose} />,
+    }
+  );
 
   const navigate = useNavigate();
 
@@ -153,12 +162,7 @@ const Home = () => {
           </Box>
         ))}
       </Flex>
-      <Show above="sm">
-        <Explainer isOpen={isOpen} onClose={onClose} />
-      </Show>
-      <Hide below="sm">
-        <ExplainerDrawer isOpen={isOpen} onClose={onClose} />
-      </Hide>
+      <Box>{explainerVariant}</Box>
     </Container>
   );
 };

@@ -50,6 +50,7 @@ const theme = extendTheme({
 });
 
 const root = createRoot(document.getElementById("root"));
+
 root.render(
   <ChakraProvider theme={theme}>
     <BrowserRouter>
