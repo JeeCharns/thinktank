@@ -105,7 +105,13 @@ const VotePage = () => {
       >
         <Center flexDir="column" px={6}>
           <Sharelink />
-          <Image src={logo} objectFit="cover" mt={6} alt="ThinkTank logo" />
+          <Image
+            src={logo}
+            objectFit="cover"
+            mt={6}
+            alt="ThinkTank logo"
+            onClick={() => navigate("/")}
+          />
         </Center>
         {loading ? (
           <Center flex={1}>

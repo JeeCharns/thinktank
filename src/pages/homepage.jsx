@@ -96,6 +96,7 @@ const Home = () => {
             objectFit="cover"
             mt={{ base: 0, md: 6 }}
             alt="ThinkTank logo"
+            onClick={() => navigate("/")}
           />
           <Text
             textStyle="h3"
