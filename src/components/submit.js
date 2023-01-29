@@ -6,14 +6,13 @@ import {
   Flex,
   Box,
   Spacer,
-  Center,
   Text,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 
-const MAX_ALLOWED_CHARACTERS = 100;
+const MAX_ALLOWED_CHARACTERS = 140;
 
-export const SubmitAnswer = ({ submit, setSubmit, onClick }) => {
+export const SubmitAnswer = ({ submit, setSubmit, onClick, loading }) => {
   const toast = useToast();
   const handleChange = (e) => {
     // We only update our state if the number of characters doesn't exceed the max allowed
@@ -32,30 +31,43 @@ export const SubmitAnswer = ({ submit, setSubmit, onClick }) => {
   };
 
   return (
-    <Center>
-      <Box w="40%">
-        <Input
-          placeholder="Submit Your Answer"
-          size="md"
-          variant="flushed"
-          focusBorderColor="gray.600"
-          isDisabled={submit.length > MAX_ALLOWED_CHARACTERS +1}
-          onChange={handleChange}
-          value={submit} />
-          <Text color='gray.300' fontSize='sm' mt="8px">{submit.length} / 100</Text>
-        <Flex>
-          <Spacer />
-          <Button
-            bgColor="gray.700"
-            color="white"
-            variant="solid"
-            onClick={onClick}
-            isDisabled={!submit.length}
-            >
-Submit          </Button>
-        </Flex>
-</Box>
-</Center>
-  )}
+    <Box w="100%">
+      <Input
+        placeholder="Submit a new response..."
+        size="md"
+        variant="flushed"
+        focusBorderColor="gray.600"
+        isDisabled={submit.length > MAX_ALLOWED_CHARACTERS + 1}
+        onChange={handleChange}
+        value={submit}
+        fontSize="14px"
+      />
+      <Text color="gray.300" fontSize="sm" mt="8px">
+        {submit.length}/{MAX_ALLOWED_CHARACTERS}
+      </Text>
+      <Flex>
+        <Spacer />
+        <Button
+          bgColor="gray.700"
+          color="white"
+          variant="solid"
+          onClick={onClick}
+          isDisabled={!submit.length}
+          fontWeight="bold"
+          isLoading={loading}
+          aria-label="Submit"
+          _hover={{
+            _disabled: {
+              cursor: "not-allowed",
+              color: "white",
+            },
+          }}
+        >
+          Submit
+        </Button>
+      </Flex>
+    </Box>
+  );
+};
 
 export default SubmitAnswer;
