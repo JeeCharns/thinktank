@@ -5,11 +5,10 @@ import {
   Flex,
   Box,
   Spacer,
-  Center,
   Text,
   useToast,
 } from "@chakra-ui/react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const MAX_ALLOWED_CHARACTERS = 100;
 
@@ -32,39 +31,48 @@ export const TextInput = ({ question, setQuestion, onClick }) => {
   };
 
   return (
-    <Center>
-      <Box pt={10} w="50%">
-        <Input
-          placeholder="Write Your Problem Statement Here"
+    <Box>
+      <Input
+        placeholder="Write your Problem Statement"
+        size="md"
+        variant="flushed"
+        focusBorderColor="gray.600"
+        isDisabled={question.length > MAX_ALLOWED_CHARACTERS + 1}
+        onChange={handleChange}
+        value={question}
+      />
+      <Text color="gray.300" fontSize="sm" mt="8px">
+        {question.length} / 100
+      </Text>
+      <Flex>
+        <Spacer />
+        <Button
           size="md"
-          variant="flushed"
-          focusBorderColor="gray.600"
-          isDisabled={question.length > MAX_ALLOWED_CHARACTERS +1}
-          onChange={handleChange}
-          value={question}
-        />
-        <Text color='gray.300' fontSize='sm' mt="8px">{question.length} / 100</Text>
-        <Flex>
-          <Spacer />
-          <Button
-            bgColor="gray.700"
-            color="white"
-            variant="solid"
-            onClick={onClick}
-            isDisabled={!question.length}
-            >
-            Create Think Tank
-          </Button>
-        </Flex>
-      </Box>
-    </Center>
+          h={{ base: "32px", md: "40px" }}
+          bgColor="gray.700"
+          color="white"
+          variant="solid"
+          onClick={onClick}
+          isDisabled={!question.length}
+          _hover={{
+            _disabled: {
+              cursor: "not-allowed",
+              color: "white",
+            },
+          }}
+          aria-label="Create Think Tank"
+        >
+          Create Think Tank
+        </Button>
+      </Flex>
+    </Box>
   );
 };
 
 TextInput.propTypes = {
   name: PropTypes.string,
   question: PropTypes.string,
-  setQuestion: PropTypes.string,
+  setQuestion: PropTypes.func,
   onClick: PropTypes.any,
 };
 

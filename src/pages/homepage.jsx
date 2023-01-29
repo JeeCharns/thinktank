@@ -1,101 +1,165 @@
-import React, { useMemo, useState } from "react";
-import { useNavigate} from 'react-router-dom';
-import HeadingHome from "../components/banner";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { TextInput } from "../components/input";
-import { Alert } from "../components/alert";
+import logo from "../assets/Logo.png";
 import { db } from "../firebase/firebase";
-import { Center, Spinner, Box, Button, Text } from "@chakra-ui/react";
-import { Copylink } from "../components/copylink";
+import {
+  Center,
+  Spinner,
+  Box,
+  Text,
+  Image,
+  Container,
+  Flex,
+  useDisclosure,
+  Divider,
+  Hide,
+  Show,
+} from "@chakra-ui/react";
+import arrow from "../assets/arrow-down.svg";
+import { collection, query, getDocs, orderBy, limit } from "firebase/firestore";
+import { QuestionCard } from "../components/question-card";
+import { Explainer } from "../components/explainer";
+import { ExplainerDrawer } from "../components/explainer-drawer";
 
 const Home = () => {
   const [question, setQuestion] = useState("");
-  const [response, setResponse] = useState({ isLoading: false, id: null});
-  
-  const handleCreateThinkTank = async () => {
-    // if the question length exists, we don't create a document
-    // and may want to show an error or disable the button
-    if (!question.length) {
-      console.log("no question!");
-      return;
-    }
-
-    setResponse({ isLoading: true, id: null });
-    // otherwise, create a new document in the ThinkTanks collection
-    // then set the document id to state so we can identify the ThinkTank
-    await db
-      .collection("ThinkTanks")
-      .add({
-        question,
-      })
-      .then((data) => {
-        console.log(`woooo new document created with id ${data.id}`);
-        setResponse({ isLoading: false, id: data.id });
-      });
-  };
+  const [loading, setLoading] = useState(false);
+  const [latestThinkTanks, setLatestThinkTanks] = useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const scrollRef = React.useRef();
 
   const navigate = useNavigate();
-  const answerPage = () => {
-    navigate(`/${response.id}`)
-  }
 
+  useEffect(() => {
+    const loadThinkTanks = async () => {
+      const q = query(
+        collection(db, "thinktanks"),
+        orderBy("createdAt", "desc"),
+        limit(20)
+      );
 
-  const renderPage = useMemo(() => {
-    if (!response.id && !response.isLoading) {
-      return (
-        <>
-          <TextInput
-            question={question}
-            setQuestion={setQuestion}
-            onClick={handleCreateThinkTank}
-          />
-          <Alert />
-        </>
-      );
-    } else if (!response.id && response.isLoading) {
-      return (
-        <Center p="50">
-          <Spinner
-            thickness="4px"
-            speed="1s"
-            emptyColor="gray.200"
-            color="teal"
-            size="lg"
-          />
-        </Center>
-      );
-    } else {
-      return (
-        <Box h="60%">
-          <Center>
-            <Box paddingTop={10} maxWidth={300}>
-              <Text color='gray.700' textAlign='center' noOfLines={2}>Project setup complete! Share the below to continue.</Text>
-              <Copylink />
-            </Box>
-            <Box pos="fixed" bottom="25%">
-              <Button
-                bgColor="gray.700"
-                color="white"
-                variant="solid"
-                size="lg"
-                onClick={answerPage}
-              >
-                Continue
-              </Button>
-            </Box>
-          </Center>
-        </Box>
-      );
-    }
-  }, [question, response.id, response.isLoading]);
+      const querySnapshot = await getDocs(q);
+      const data = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+      setLatestThinkTanks(data);
+    };
+    loadThinkTanks();
+  }, []);
+
+  const handleCreateThinkTank = async () => {
+    setLoading(true);
+    await db
+      .collection("thinktanks")
+      .add({
+        question,
+        createdAt: new Date(),
+      })
+      .then((data) => {
+        setLoading(false);
+        navigate(`/${data.id}`);
+      })
+      .finally(() => setLoading(false));
+  };
 
   return (
-    <>
-     <Box pt={10}>
-      <HeadingHome />
-      {renderPage}
+    <Container p={0} maxW="375px">
+      <Box
+        pt={10}
+        display="flex"
+        alignItems="center"
+        flexDir="column"
+        minH="90vh"
+        justifyContent="space-between"
+      >
+        <Center
+          flexDir="column"
+          flex={1}
+          justifyContent="flex-start"
+          px={6}
+          mt={6}
+        >
+          <Box h="24px" />
+          <Image
+            src={logo}
+            objectFit="cover"
+            mt={{ base: 0, md: 6 }}
+            alt="ThinkTank logo"
+          />
+          <Text
+            textStyle="h3"
+            as="button"
+            fontSize={{ base: "xs", md: "md" }}
+            fontWeight="bold"
+            onClick={onOpen}
+            color="orange.300"
+            textDecor="underline"
+            w="100%"
+            mt={{ base: 3, md: 6 }}
+            aria-label="Open explainer"
+          >
+            What is ThinkTank?
+          </Text>
+        </Center>
+        {loading ? (
+          <Center flex={1}>
+            <Spinner
+              thickness="4px"
+              speed="1s"
+              emptyColor="gray.200"
+              color="teal"
+              size="lg"
+            />
+          </Center>
+        ) : (
+          <Box w="100%" flex={1} px={{ base: 8, md: 0 }}>
+            <TextInput
+              question={question}
+              setQuestion={setQuestion}
+              onClick={handleCreateThinkTank}
+            />
+          </Box>
+        )}
+        <Flex
+          flex={1}
+          alignItems="flex-end"
+          as="button"
+          onClick={() =>
+            scrollRef.current.scrollIntoView({
+              behavior: "smooth",
+            })
+          }
+          aria-label="Scroll down arrow"
+          mb={6}
+        >
+          <Image src={arrow} alt="Arrow pointing down" />
+        </Flex>
       </Box>
-    </>
-    
+      <Flex flexDir="column" pb={8} ref={scrollRef} minH="100vh">
+        {latestThinkTanks.map((question, i) => (
+          <Box key={question.id} w="100%">
+            {i !== 0 && <Divider w="100%" />}
+            <Box px={8}>
+              <QuestionCard
+                id={question.id}
+                question={question.data.question}
+                date={question.data.createdAt.toDate()}
+                participants={question.data?.responses?.length || 0}
+                votes={question.data?.totalVotes || 0}
+              />
+            </Box>
+          </Box>
+        ))}
+      </Flex>
+      <Show above="sm">
+        <Explainer isOpen={isOpen} onClose={onClose} />
+      </Show>
+      <Hide below="md">
+        <ExplainerDrawer isOpen={isOpen} onClose={onClose} />
+      </Hide>
+    </Container>
   );
 };
 
