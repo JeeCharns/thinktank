@@ -156,7 +156,7 @@ const Home = () => {
       <Show above="sm">
         <Explainer isOpen={isOpen} onClose={onClose} />
       </Show>
-      <Hide below="md">
+      <Hide below="sm">
         <ExplainerDrawer isOpen={isOpen} onClose={onClose} />
       </Hide>
     </Container>
