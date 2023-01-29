@@ -30,7 +30,7 @@ export const QuestionCard = ({ id, question, date, participants, votes }) => {
       </Flex>
       <Text color="gray.400">
         {participants} participant{getPlural(participants)}, {votes} vote
-        {getPlural(participants)}
+        {getPlural(votes)}
       </Text>
     </Box>
   );
