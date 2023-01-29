@@ -18,6 +18,7 @@ import arrow from "../assets/arrow-down.svg";
 import { AnswerCard } from "../components/answer-card";
 import logo from "../assets/Logo.png";
 import { useRef } from "react";
+import { getPlural } from "../helpers/utils.js";
 
 const VotePage = () => {
   const [thinktankDocRef, setThinktankDocRef] = useState(null);
@@ -111,6 +112,7 @@ const VotePage = () => {
             mt={6}
             alt="ThinkTank logo"
             onClick={() => navigate("/")}
+            cursor="pointer"
           />
         </Center>
         {loading ? (
@@ -155,8 +157,10 @@ const VotePage = () => {
                 Responses
               </Text>
               <Text color="gray.400" mt={2} textStyle="b2">
-                {thinktankData?.responses?.length} responses,{" "}
-                {thinktankData?.totalVotes || 0} votes
+                {thinktankData?.responses?.length || 0} response
+                {getPlural(thinktankData?.responses?.length || 0)},{" "}
+                {thinktankData?.totalVotes || 0} vote
+                {getPlural(thinktankData?.totalVotes || 0)}
               </Text>
             </Box>
           </>

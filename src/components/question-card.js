@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import arrow from "../assets/arrow-right.svg";
 import { useNavigate } from "react-router-dom";
+import { getPlural } from "../helpers/utils.js";
 
 dayjs.extend(advancedFormat);
 
@@ -28,7 +29,8 @@ export const QuestionCard = ({ id, question, date, participants, votes }) => {
         <Image src={arrow} alt="ThinkTank logo" />
       </Flex>
       <Text color="gray.400">
-        {participants} participants, {votes} votes
+        {participants} participant{getPlural(participants)}, {votes} vote
+        {getPlural(participants)}
       </Text>
     </Box>
   );
