@@ -91,6 +91,7 @@ const Home = () => {
             mt={{ base: 0, md: 6 }}
             alt="ThinkTank logo"
             onClick={() => navigate("/")}
+            cursor="pointer"
           />
           <Text
             textStyle="h3"
